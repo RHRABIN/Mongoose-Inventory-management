@@ -4,6 +4,7 @@ const colors = require("colors");
 // const DBConnect = require("./utils/dbConnect");
 
 const app = require("./app");
+
 const uri = `mongodb+srv://${process.env.MONGODB_USERNAME}:${process.env.MONGODB_PASSWORD}@cluster0.mj18m.mongodb.net/?retryWrites=true&w=majority`;
 // database connection
 mongoose
