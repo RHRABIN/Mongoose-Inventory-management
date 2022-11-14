@@ -14,7 +14,7 @@ const categoryModel = mongoose.model(
     description: String,
     imageUrl: {
       type: String,
-      validate: [validator.isUrl, "Please enter a valid url address"],
+      validate: [validator.isURL, "Please enter a valid url address"],
     },
   },
   { timestamps: true }
