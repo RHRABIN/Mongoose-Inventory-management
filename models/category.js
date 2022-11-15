@@ -2,7 +2,7 @@ const mongoose = require("mongoose");
 const { ObjectId } = mongoose.Schema.Types;
 const validator = require("validator");
 
-const categoryModel = mongoose.model(
+const categoryModel = mongoose.Schema(
   {
     name: {
       type: String,
@@ -17,7 +17,9 @@ const categoryModel = mongoose.model(
       validate: [validator.isURL, "Please enter a valid url address"],
     },
   },
-  { timestamps: true }
+  {
+    timestamps: true,
+  }
 );
 
 const Category = mongoose.model("Category", categoryModel);

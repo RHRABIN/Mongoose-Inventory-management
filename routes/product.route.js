@@ -13,6 +13,7 @@ router
 // all dynamic route declare under other routes
 router
   .route("/:id")
+  .get(productController.getSingleProduct)
   .patch(productController.updateProduct)
   .delete(productController.deleteProductById);
 

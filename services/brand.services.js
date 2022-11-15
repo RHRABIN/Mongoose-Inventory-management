@@ -5,7 +5,7 @@ exports.createBrandServices = async (data) => {
   return result;
 };
 exports.getBrandsServices = async () => {
-  const brands = await Brand.find({}).select("-products -suppliers");
+  const brands = await Brand.find({}).populate("products");
   return brands;
 };
 exports.getBrandServices = async (id) => {
