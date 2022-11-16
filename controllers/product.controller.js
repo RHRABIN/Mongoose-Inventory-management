@@ -182,3 +182,10 @@ exports.bulkDelete = async (req, res, next) => {
     });
   }
 };
+
+exports.fileUpload = async (req, res, next) => {
+  try {
+    // res.status(200).json(req.file);  //for single file upload
+    res.status(200).json(req.files); // for multiple files upload
+  } catch (error) {}
+};
