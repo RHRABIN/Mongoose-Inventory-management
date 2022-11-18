@@ -5,8 +5,8 @@ exports.createSupplierServices = async (data) => {
   return result;
 };
 exports.getSuppliersServices = async () => {
-  const brands = await Supplier.find({});
-  return brands;
+  const brand = await Supplier.find({});
+  return brand;
 };
 exports.getSupplierServices = async (id) => {
   const brand = await Supplier.findOne({ _id: id });

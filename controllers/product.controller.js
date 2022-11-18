@@ -160,7 +160,7 @@ exports.getSingleProduct = async (req, res, next) => {
   } catch (error) {
     res.status(400).json({
       status: "failure",
-      message: "Data delete failed",
+      message: "Data loaded failed",
       error: error.message,
     });
   }

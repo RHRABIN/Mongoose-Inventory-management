@@ -1,5 +1,7 @@
 const Product = require("../models/Product");
 const Brand = require("../models/Brand");
+const mongoose = require("mongoose");
+const ObjectId = mongoose.Types.ObjectId;
 
 exports.getProductsService = async (filters, queries) => {
   const product = await Product.find(filters)
@@ -12,8 +14,31 @@ exports.getProductsService = async (filters, queries) => {
   const pageCount = Math.ceil(totalProducts / queries.limit);
   return { totalProducts, pageCount, product };
 };
+
 exports.getSingleProductService = async (id) => {
-  const product = await Product.findOne({ _id: id });
+  // const product = await Product.findOne({ _id: id });
+
+  const product = await Product.aggregate([
+    // stage one
+    { $match: { _id: ObjectId(id) } },
+    {
+      $project: {
+        name: 1,
+        unit: 1,
+        category: 1,
+        "brand.name": { $toLower: "$brand.name" },
+      },
+    },
+    {
+      $lookup: {
+        from: "brands",
+        localField: "brand.name",
+        foreignField: "name",
+        as: "brandDetails",
+      },
+    },
+  ]);
+
   return product;
 };
 
