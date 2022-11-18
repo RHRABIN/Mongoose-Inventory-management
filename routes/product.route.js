@@ -2,6 +2,8 @@ const express = require("express");
 const router = express.Router();
 const productController = require("../controllers/product.controller");
 const uploader = require("../middleware/uploader");
+const verifyToken = require("../middleware/verifyToken");
+const authorization = require("../middleware/authorization");
 
 router.post(
   "/file-upload",
@@ -13,7 +15,11 @@ router.route("/bulk-delete").delete(productController.bulkDelete);
 
 router
   .route("/")
-  .get(productController.getProducts)
+  .get(
+    verifyToken,
+    authorization("buyer", "store"),
+    productController.getProducts
+  )
   .post(productController.postProduct);
 
 // all dynamic route declare under other routes
